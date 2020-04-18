@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mongo
+    restart: always
+    volumes:
+      - mongodata:/data/db
+
+  cimitra:
+    image: cimitra/server:rc
+    restart: always
+    environment:
+      APPIT_DB_URL: mongodb://db/cimitra_prod
+    depends_on:
+      - db
+
+  web:
+    image: cimitra/web:rc
+    ports:
+      - 81:80
+      - 444:443
+    restart: always
+    environment:
+      CIMITRA_API_URL: http://cimitra:5007
+    depends_on:
+      - cimitra
+    # volumes:
+    #   # List the path of your existing file on the left of the colon
+    #   # and leave the path on the right as is and uncomment the line.
+    #   # You must have at least the certificate and the key files
+    #   # Optionally you can also pass a CA file
+    #   - ./my_cert.crt:/etc/ssl/certs/server.crt
+    #   - ./my_key.key:/etc/ssl/private/server.key
+    #   - ./my_ca.crt:/etc/ssl/certs/server-ca.crt
+
+volumes:
+  mongodata:
+  
+  

@@ -3,13 +3,13 @@ version: '3.1'
 services:
 
   db:
-    image: mongo:4
+    image: mongo
     
   ### DATABASE PORT FOR EXTERNAL ACCESS BEGIN ###
   ### --------------------------------------- ###
   ### For external access to the MongoDB database ###
   ### remove the "#" symbol before    ports: (and) - 27017:27017 ###
-  ### Note: The "- 27017:27017" line should keep it's indentation so ### 
+  ### Note: The "- 27017:27017" line should keep its indentation so ### 
   ### that the dash (-) is right under the "o" in the word "ports" ###
  
     #ports:
